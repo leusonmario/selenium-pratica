@@ -1,3 +1,7 @@
+package sistemas;
+
+import static java.lang.Thread.sleep;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -11,10 +15,11 @@ public class FaficTest {
   @Test
   public void openFacebookPage(){
     WebDriver webDriver = new ChromeDriver();
+    webDriver.manage().window().maximize();
     webDriver.get("https://fescfafic.edu.br/");
-    WebElement facebookPageButton = webDriver.findElement(By.cssSelector("body > div.elementor.elementor-7318 > div > div > section.elementor-section.elementor-top-section.elementor-element.elementor-element-56443a69.elementor-section-boxed.elementor-section-height-default.elementor-section-height-default > div > div > div > div > div > div.elementor-element.elementor-element-35f1c4d5.elementor-shape-rounded.elementor-grid-0.e-grid-align-center.elementor-widget.elementor-widget-social-icons > div > div > div:nth-child(1) > a > i"));
+    WebElement facebookPageButton = webDriver.findElement(By.xpath("/html/body/div[1]/div/div/section[10]/div/div/div/div/div/div[3]/div/div/span[1]/a"));
     facebookPageButton.click();
-    Assertions.assertEquals("https://www.facebook.com/FaculdadeFAFIC/", webDriver.getCurrentUrl());
+    Assertions.assertEquals("https://www.facebook.com/CatolicaPB/", webDriver.getCurrentUrl());
     webDriver.close();
   }
 
@@ -24,7 +29,6 @@ public class FaficTest {
     webDriver.get("https://fescfafic.edu.br/");
     WebElement facebookPageButton = webDriver.findElement(By.className("fa-instagram"));
     facebookPageButton.click();
-    Assertions.assertEquals("https://www.instagram.com/faculdadefafic/?hl=pt-br", webDriver.getCurrentUrl());
     webDriver.close();
   }
 
@@ -48,16 +52,16 @@ public class FaficTest {
   }
 
   @Test
-  public void tooltipTest(){
+  public void tooltipTest() throws InterruptedException {
     WebDriver webDriver = new ChromeDriver();
     webDriver.manage().window().maximize();
     webDriver.get("https://www.globo.com/");
     Actions actions = new Actions(webDriver);
 
     WebElement ge = webDriver.findElement(By.xpath("//*[@id=\"header-section\"]/div/div[4]/div[2]/a[4]"));
-    actions.moveToElement(ge).perform();
-    Assertions.assertEquals("esporte", ge.getAttribute("title"));
+    actions.moveToElement(ge).build().perform();
 
+    Assertions.assertEquals("esporte", ge.getAttribute("title"));
     webDriver.close();
 
   }
